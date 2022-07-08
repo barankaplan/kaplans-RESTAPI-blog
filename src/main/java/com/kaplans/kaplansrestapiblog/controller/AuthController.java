@@ -93,6 +93,7 @@ public class AuthController {
         User user = new User();
         user.setUserName(signUpDTO.getUserName());
         user.setEMail(signUpDTO.getEMail());
+        //encoding here
         user.setPassword(passwordEncoder.encode(signUpDTO.getPassword()));
 
         Optional<Role> roles = iRoleRepository.findByName("ROLE_ADMIN");
