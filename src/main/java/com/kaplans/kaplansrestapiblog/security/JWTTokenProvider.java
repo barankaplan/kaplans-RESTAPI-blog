@@ -12,6 +12,8 @@ import java.util.Date;
 
 @Component
 public class JWTTokenProvider {
+    //jwtpart1
+
 
     @Value("${app.jwt-secret}")
     private String jwtSecret;
@@ -24,6 +26,8 @@ public class JWTTokenProvider {
         String username = authentication.getName();
         Date currentDate = new Date();
         Date expireDate = new Date(currentDate.getTime() + jwtExpirationInMs);
+
+        //this is our token !
         return Jwts.builder().setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(expireDate)
