@@ -48,47 +48,48 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
     }
 
 //before jwt kaplan- kaplan password is encoded !
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api**/").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/**/").permitAll()
-                .antMatchers("/api/auth/**").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
-
-    }
-
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
+//        http.csrf()
+//                .disable()
 //                .authorizeRequests()
+//                .antMatchers(HttpMethod.GET, "/api**/").permitAll()
 //                .antMatchers(HttpMethod.GET, "/api/**/").permitAll()
-////                .antMatchers(HttpMethod.POST, "/api/**/").permitAll()
 //                .antMatchers("/api/auth/**").permitAll()
-//                .antMatchers("/v2/api-docs/**").permitAll()
-//                .antMatchers("/configuration/ui").permitAll()
-//                .antMatchers("/v3/api-docs/**").permitAll()
-//                .antMatchers("/swagger-ui/**").permitAll()
-//                .antMatchers("/swagger-resources/**").permitAll()
-//                .antMatchers("/swagger-ui.html").permitAll()
-//                .antMatchers("/webjars/**").permitAll()
 //                .anyRequest()
-//                .authenticated();
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+//                .authenticated()
+//                .and()
+//                .httpBasic();
 //
 //    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)//stateless
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/api/**/").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/**/").permitAll()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/v2/api-docs/**").permitAll()
+                .antMatchers("/configuration/ui").permitAll()
+                .antMatchers("/v3/api-docs/**").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .anyRequest()
+                .authenticated();
+
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+    }
 //
 //    @Override
 //    public void configure(WebSecurity web) throws Exception {

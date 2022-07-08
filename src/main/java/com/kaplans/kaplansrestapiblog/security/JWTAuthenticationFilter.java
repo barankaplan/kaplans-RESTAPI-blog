@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
+    //aims to guarantee a single execution per request dispatch
 
     @Autowired
     private  JWTTokenProvider jwtTokenProvider;
@@ -47,10 +48,12 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     }
 
+
+    //bearer token ! our string !
     private String getJWTFromToken(HttpServletRequest httpServletRequest) {
         String bearerToken = httpServletRequest.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
-            return bearerToken.substring(7, bearerToken.length());
+            return bearerToken.substring(7);
         }
         return null;
     }

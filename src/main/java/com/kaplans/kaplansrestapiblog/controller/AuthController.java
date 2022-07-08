@@ -48,34 +48,34 @@ public class AuthController {
     }
 
 
-    //before jwt
-    @PostMapping("/signin")
-    public ResponseEntity<String> autehnticateUser(@RequestBody LoginDTO loginDTO){
-       Authentication authentication= authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUserNameOrEMail(),
-                        loginDTO.getPassword() ));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        return new ResponseEntity<>("User signed in successfully", HttpStatus.OK);
-    }
-
-
-
-
-//
-//    @ApiOperation("REST API to sign or or sign up user to Blog app")
+//    //before jwt
 //    @PostMapping("/signin")
-//    public ResponseEntity<JWTAuthResponse> autehnticateUser(@RequestBody LoginDTO loginDTO) {
-//        Authentication authentication = authenticationManager
+//    public ResponseEntity<String> autehnticateUser(@RequestBody LoginDTO loginDTO){
+//       Authentication authentication= authenticationManager
 //                .authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUserNameOrEMail(),
-//                        loginDTO.getPassword()));
+//                        loginDTO.getPassword() ));
+//
 //        SecurityContextHolder.getContext().setAuthentication(authentication);
 //
-//        //get token from provider
-//        String token = jwtTokenProvider.generateToken(authentication);
-//        return ResponseEntity.ok(new JWTAuthResponse(token));
+//        return new ResponseEntity<>("User signed in successfully", HttpStatus.OK);
 //    }
+
+
+
+
+
+    @ApiOperation("REST API to sign or or sign up user to Blog app")
+    @PostMapping("/signin")
+    public ResponseEntity<JWTAuthResponse> autehnticateUser(@RequestBody LoginDTO loginDTO) {
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUserNameOrEMail(),
+                        loginDTO.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        //get token from provider
+        String token = jwtTokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(new JWTAuthResponse(token));
+    }
 
     @ApiOperation("REST API to sign or or sign up user to Blog app")
     @PostMapping("/signup")
