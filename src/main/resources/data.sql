@@ -77,8 +77,8 @@ insert into comments (name, e_mail, body,post_id) values ('Gideon', 'gashdowny@g
 insert into roles (role_id, name) VALUES (1,'ROLE_ADMIN');
 insert into roles (role_id, name) VALUES (2,'ROLE_USER');
 
-insert into users (user_id, e_mail, password, user_name) VALUES (1,'admin@gmail.com','admin','admin');
-insert into users (user_id, e_mail, password, user_name) VALUES (2,'admin@gmail.com','kaplan','kaplan');
+insert into users (user_id, e_mail, password, user_name) VALUES (1,'admin@gmail.com','$2a$10$F9vbLyvnjwDdXhvvZOFhYu/hJxQj2nXaN2nd4adufbK93FivLXvfe','admin');
+insert into users (user_id, e_mail, password, user_name) VALUES (2,'kaplan@gmail.com','$2a$10$PmlJyTCF1aTD/rKbj0Ndz.IH0mqWlbNeprhXurLJyvSFLJGgQmgSu','kaplan');
 
 insert into users_roles(user_id, role_id) VALUES (1,1);
 insert into users_roles(user_id, role_id) VALUES (2,2)

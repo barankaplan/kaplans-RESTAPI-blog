@@ -47,56 +47,57 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
         return new BCryptPasswordEncoder();
     }
 
+//before jwt
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf()
+                .disable()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/api**/").permitAll()
+                .antMatchers("/api/auth/**").permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic();
+
+    }
 
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf()
-//                .disable()
-//                .authorizeRequests()
-//                .antMatchers(HttpMethod.GET, "/api**/").permitAll()
-//                .antMatchers("/api/auth/**").permitAll()
-//                .anyRequest()
-//                .authenticated()
+//        http
+//                .csrf().disable()
+//                .exceptionHandling()
+//                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
 //                .and()
-//                .httpBasic();
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers(HttpMethod.GET, "/api/**/").permitAll()
+////                .antMatchers(HttpMethod.POST, "/api/**/").permitAll()
+//                .antMatchers("/api/auth/**").permitAll()
+//                .antMatchers("/v2/api-docs/**").permitAll()
+//                .antMatchers("/configuration/ui").permitAll()
+//                .antMatchers("/v3/api-docs/**").permitAll()
+//                .antMatchers("/swagger-ui/**").permitAll()
+//                .antMatchers("/swagger-resources/**").permitAll()
+//                .antMatchers("/swagger-ui.html").permitAll()
+//                .antMatchers("/webjars/**").permitAll()
+//                .anyRequest()
+//                .authenticated();
+//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 //
 //    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/**/").permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/**/").permitAll()
-                .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/v2/api-docs/**").permitAll()
-                .antMatchers("/configuration/ui").permitAll()
-                .antMatchers("/v3/api-docs/**").permitAll()
-                .antMatchers("/swagger-ui/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/webjars/**").permitAll()
-                .anyRequest()
-                .authenticated();
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**","/webjars/**","/v2/api-docs/**");
-    }
+//
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**","/webjars/**","/v2/api-docs/**");
+//    }
 
 
 //    @Override
 //    @Bean
+    //this is memory auth
 //    protected UserDetailsService userDetailsService() {
 //        UserDetails kaplan = User.builder().username("kaplan").
 //                password(passwordEncoder().encode("kaplan1989"))
@@ -109,9 +110,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
 
 
+    //memory db
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customerUserDetailService ).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(customerUserDetailService )
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override

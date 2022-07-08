@@ -3,6 +3,7 @@ package com.kaplans.kaplansrestapiblog.controller;
 
 import com.kaplans.kaplansrestapiblog.data.entity.Post;
 import com.kaplans.kaplansrestapiblog.dto.PostDTO;
+import com.kaplans.kaplansrestapiblog.dto.PostDTOV2;
 import com.kaplans.kaplansrestapiblog.info.PostResponse;
 import com.kaplans.kaplansrestapiblog.service.IPostService;
 import org.springframework.http.HttpStatus;
@@ -25,17 +26,17 @@ public class PostControllerV2 {
     }
 
 
-//    @PreAuthorize("hasRole('USER')")
-//    @PostMapping("create")
-//    public ResponseEntity<PostDTOV2> createPost(@Valid @RequestBody Post post) {
-//        return new ResponseEntity<>(iPostService.createPostDTOV2(post), HttpStatus.CREATED);
-//    }
-
-     @PostMapping("create")
-    public ResponseEntity<PostDTO> createPost(@Valid @RequestBody Post post) {
-//        return new ResponseEntity<>(iPostService.createPostDTOV2(post), HttpStatus.CREATED);
-        return new ResponseEntity<>(iPostService.createPostDTO(post), HttpStatus.CREATED);
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("create")
+    public ResponseEntity<PostDTOV2> createPost(@Valid @RequestBody Post post) {
+        return new ResponseEntity<>(iPostService.createPostDTOV2(post), HttpStatus.CREATED);
     }
+
+//     @PostMapping("create")
+//    public ResponseEntity<PostDTO> createPost(@Valid @RequestBody Post post) {
+////        return new ResponseEntity<>(iPostService.createPostDTOV2(post), HttpStatus.CREATED);
+//        return new ResponseEntity<>(iPostService.createPostDTO(post), HttpStatus.CREATED);
+//    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("update-by-id/{id}")
