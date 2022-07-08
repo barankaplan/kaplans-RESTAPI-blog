@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
         return new BCryptPasswordEncoder();
     }
 
-//before jwt
+//before jwt kaplan- kaplan password is encoded !
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
