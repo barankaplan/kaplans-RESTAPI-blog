@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Configuration
-public class SwaggerConfiguration {
+public class  SwaggerConfiguration {
 
     public static final String AUTHORIZATION_HEADER="Authorization";
 
@@ -24,7 +24,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfo("Spring Boot - Blog REST API",
                 "Spring Boot - Blog REST API Documentation", "1",
-                "Terms of services", new Contact("Baran Kaplan", "www.barankaplan.com",
+                "Terms of services", new Contact("Baran Kaplan", "https://github.com/barankaplan",
                 "info@barankaplan.com"), "License of API", "API licence URL", Collections.emptyList());
     }
     @Bean
