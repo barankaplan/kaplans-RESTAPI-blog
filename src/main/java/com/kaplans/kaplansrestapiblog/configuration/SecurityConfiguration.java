@@ -170,6 +170,7 @@ public class SecurityConfiguration   {
                 .authorizeRequests((authorize) -> authorize
                         .antMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
                         .antMatchers("/api/v1/auth/**").permitAll()
+                        .antMatchers("/api/auth/**").permitAll()
                         .antMatchers("/v2/api-docs/**").permitAll()
                         .antMatchers("/api/v2/**").permitAll()
                         .antMatchers("/swagger-ui/**").permitAll()
